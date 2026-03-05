@@ -1,0 +1,2 @@
+symbol,direction,entry_time,entry,sl,tp1,tp2,context_id,tbs_time,model1_time_ts,tbs_sweep_time,model1_time,confirmation_time
+BTCUSDT,SELL,1769025060,89891.4,90376.4,88919.75,87524.7,BTCUSDT-3c4def6d4e55,1769024880,1769024880,2026-01-21T22:48:00+00:00,2026-01-21T22:48:00+00:00,2026-01-21T22:51:00+00:00

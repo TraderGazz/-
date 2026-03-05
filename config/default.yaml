@@ -1,0 +1,565 @@
+markets:
+  forex:
+    enabled: true
+    symbols: ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "USDCAD", "AUDUSD", "NZDUSD", "EURJPY", "GBPJPY", "EURGBP", "AUDJPY", "CADJPY", "CHFJPY", "XAUUSD", "XAGUSD"]
+    timeframes:
+      h1: "TIMEFRAME_H1"
+      m1: "TIMEFRAME_M1"
+    mt5_timezone: "local"
+    data_source: "mt5_api"  # mt5_api | mt5_file
+    feed_dir: "${MT5_FEED_DIR}"
+    stale_seconds: 180
+    point_value_map:
+      EURUSD: 0.00001
+      GBPUSD: 0.00001
+      USDJPY: 0.001
+      USDCHF: 0.00001
+      USDCAD: 0.00001
+      AUDUSD: 0.00001
+      NZDUSD: 0.00001
+      EURJPY: 0.001
+      GBPJPY: 0.001
+      EURGBP: 0.00001
+      AUDJPY: 0.001
+      CADJPY: 0.001
+      CHFJPY: 0.001
+      XAUUSD: 0.01
+      XAGUSD: 0.001
+    min_tick_map:
+      EURUSD: 0.00001
+      GBPUSD: 0.00001
+      USDJPY: 0.001
+      USDCHF: 0.00001
+      USDCAD: 0.00001
+      AUDUSD: 0.00001
+      NZDUSD: 0.00001
+      EURJPY: 0.001
+      GBPJPY: 0.001
+      EURGBP: 0.00001
+      AUDJPY: 0.001
+      CADJPY: 0.001
+      CHFJPY: 0.001
+      XAUUSD: 0.01
+      XAGUSD: 0.001
+    commission:
+      mode: "per_trade_points"
+      value_points_map:
+        EURUSD: 0.0
+        GBPUSD: 0.0
+        USDJPY: 0.0
+        USDCHF: 0.0
+        USDCAD: 0.0
+        AUDUSD: 0.0
+        NZDUSD: 0.0
+        EURJPY: 0.0
+        GBPJPY: 0.0
+        EURGBP: 0.0
+        AUDJPY: 0.0
+        CADJPY: 0.0
+        CHFJPY: 0.0
+        XAUUSD: 0.0
+        XAGUSD: 0.0
+    spread:
+      mode: "fixed"
+      value_points_map:
+        EURUSD: 12
+        GBPUSD: 18
+        USDJPY: 14
+        USDCHF: 16
+        USDCAD: 18
+        AUDUSD: 16
+        NZDUSD: 20
+        EURJPY: 20
+        GBPJPY: 28
+        EURGBP: 16
+        AUDJPY: 24
+        CADJPY: 22
+        CHFJPY: 26
+        XAUUSD: 250
+        XAGUSD: 35
+  crypto:
+    enabled: true
+    symbols: ["BTCUSDT", "ETHUSDT"]
+    timeframes:
+      h1: "60"
+      m1: "1"
+    bybit_category: "linear"
+    commission_pct: 0.0006
+    commission_apply: "round_trip"
+    min_tick_map:
+      BTCUSDT: 0.01
+      ETHUSDT: 0.01
+    spread:
+      mode: "fixed_pct"
+      value: 0.00005
+
+
+logging:
+  mode: "NORMAL"
+  root: "WARNING"
+  loggers:
+    "src.tools.live_runner": "INFO"
+    "src.tools.paper_replay_runner": "INFO"
+    "src.paper": "INFO"
+    "src.strategy": "WARNING"
+    "src.strategy.m1_execution": "WARNING"
+    "src.strategy.m1_execution.entry_engine": "WARNING"
+    "src.fetchers": "WARNING"
+    "src.fetchers.mt5_tf_cache": "WARNING"
+    "src.fetchers.mt5_fetcher": "WARNING"
+    "src.fetchers.bybit_fetcher": "WARNING"
+    "src.runtime.telegram": "WARNING"
+
+strategy:
+  crt_atr_mult: 1.3
+  atr_period: 14
+  crt_atr_min_mult: 1.0
+  crt_atr_max_mult: null
+  crt_local_lookback: 8
+  crt_range_mult: 1.35
+  crt_body_pct_min: 0.5
+  crt_doji_body_pct_max: 0.1
+  crt_close_edge_min: 0.18
+  crt_spike_domwick_min: 0.60
+  crt_spike_body_max: 0.25
+  crt_max_inside: 2
+  sweep_buffer_atr: 0.05
+  sweep_enabled: true
+  sweep_allow_multiple: true
+  sweep_check_inside_crt: true
+  sweep_penetration_min_pct: 0.0
+  crt_max_minutes: 90
+  h1_keylevel_post_crt_bars: 3
+  log_crt: false
+  logging:
+    enable_pipeline: true
+    enable_trade_stats: true
+  filters:
+    use_daily_extremes: false
+    daily_extreme_atr: 0.5
+    require_trend_alignment: false
+    trend_ma_period: 50
+    session_blocks: []
+    news:
+      enabled: false
+      blackout_minutes_before: 15
+      blackout_minutes_after: 15
+      events: []
+  keylevel:
+    pivot_k: 2
+    lookback: 50
+    max_dist_atr: 1.0
+    exclude_recent_bars: 3
+    touch_count: 1
+  h1_keylevel_lookback_bars: 100
+  swing_left: 2
+  swing_right: 2
+  fvg_enabled: true
+  ob_enabled: true
+  rb_enabled: true
+  ob_zone_mode: "body"
+  rb_wick_mult: 2.0
+  keylevel_zone_expand_pct: 0.05
+  h1_context_ttl_hours: 4
+  context_invalidation_enabled: false
+  confidence_weights:
+    crt: 1.0
+    keylevel: 1.0
+    sweep: 0.5
+    body_sweep: 0.5
+  tbs_enabled: true
+  tbs_max_wait_bars: 12
+  tbs_sweep_buffer_ticks: 0.0
+  tbs_sweep_buffer_pct: 0.0
+  tbs_return_buffer_ticks: 0.0
+  tbs_return_buffer_pct: 0.0
+  tbs_allow_wick_sweep: true
+  tbs_body_pct_min: 0.5
+  tbs_range_mult: 1.2
+  tbs_max_lifetime_bars: 60
+  model1_enabled: true
+  model1_max_wait_bars: 60
+  context_activation_max_h1_bars: 2
+  context_activation_requires_sweep: true
+  context_prefer_newer_crt: true
+  context_crt_override_min_ratio: 1.1
+  context_crt_override_if_updates_olp_ohp: true
+  ltf:
+    use_zone: false
+    window_minutes: 60
+    crt_window_minutes: 90
+    zone_depth_atr: 1.0
+    zone_buffer_atr: 0.2
+    zone_window_minutes: 30
+    model1_body_min_atr: 0.1
+    model1_body_pct_min: 70
+    model1_range_atr_min: 1.0
+    model1_wick_pct_max: 20
+    model1_mode: "STRICT"
+  entry:
+    mode: "market"
+    entry_slippage_pct: 0.003
+    entry_window_bars: 3
+    entry_enabled: true
+    entry_sl_mode: "model1"
+    entry_sl_buffer_type: "atr"
+    entry_sl_buffer_value: 1.2
+    entry_tp_enabled: true
+    entry_sl_buffer_ticks: 0.0
+    entry_sl_buffer_pct: 0.0
+    tbs_sl_buffer_pct_of_crt: 0.01
+    rr_gate_enabled: true
+    min_rr_to_tp1: 1.0
+    max_slippage_r: 0.30
+    reject_if_sl_hit: true
+    reject_if_tp1_hit: true
+    reject_if_tp2_hit: true
+    forex_max_late_bars_m1: 1
+    forex_max_late_bars_m5: 1
+  tp:
+    tp1_r: 0.9
+    tp2_r: 2.0
+    use_tp2: true
+  lock:
+    enabled: true
+    scope: "context"
+    mode: "symbol+direction"
+    ttl_seconds: 14400
+    key_prefix: ""
+    release_on: ["TP2", "SL", "TIMEOUT"]
+  dome:
+    context_ttl_seconds: 14400
+    invalidate:
+      enabled: true
+      max_distance_from_crt_pct: 0.6
+      break_opposite_boundary: true
+      max_keylevel_distance_pct: 0.4
+  reentry_enabled: true
+  reentry_max_attempts: 1
+  reentry_risk_multiplier: 0.5
+  reentry_require_reclaim_close: true
+  reentry_min_rr_to_tp1: 1.15
+  reentry_use_sweep_candle_sl: true
+  reentry_sl_buffer_atr_mult: 0.1
+  reentry_cooldown_bars: 0
+  reentry:
+    enabled: true
+    require_new_sweep: true
+    max_reentries_per_ctx: 1
+    min_rr_tp1: 1.15
+    cooldown_minutes_after_sl: 0
+    sweep_delta_points: 0
+    ctx_ttl_minutes: 1440
+  paper_sim_enabled: false
+  paper_initial_balance: 10000
+  paper_base_risk_pct: 0.01
+  paper_max_risk_pct: 0.05
+  paper_tp1_close_fraction: 0.5
+  paper_move_sl_to_be_on_tp1: true
+  paper_be_lock_r_mult: 0.1
+  paper_intrabar_mode: "M1"
+  paper_ohlc_touch_policy: "conservative"
+  paper_use_mt5_lots: true
+  paper_leverage: 100
+  paper_check_margin: false
+  paper_rounding_mode: "floor"
+  paper_on_lot_too_small: "skip"
+  paper_on_margin_insufficient: "reduce"
+  paper_out_dir: "out/paper"
+  paper_run_name: "EURUSD_YYYYMMDD_HHMMSS"
+  resolver:
+    max_active_per_direction: 1
+    weights:
+      status: 10
+      keylevel: 5
+      recency: 2
+      price_distance: 8
+      zone_width: 3
+
+risk:
+  max_cost_pct_tp1: 0.15
+  min_sl_buffer_pips: 2
+  sl_buffer_atr: 0.2
+  slippage_atr_mult: 0.0
+  max_sl_atr: 2.0
+  cooldown_min: 60
+  position_size_mode: "fixed_risk"
+  risk_per_trade_pct: 0.5
+  tp1_fraction: 0.5
+
+m1:
+  model1:
+    min_body_atr_mult: 0.8
+    max_confirm_delay_bars: 3
+  entry:
+    enter_on_confirm_close: true
+    sl_buffer_atr_mult: 0.1
+
+backtest:
+  start_date: "2025-01-01"
+  end_date: "2026-01-01"
+  warmup_days: 14
+  seed: 42
+
+outputs:
+  base_dir: "outputs"
+
+data:
+  crypto:
+    use_disk_cache: true
+    cache_dir: "data_cache"
+    max_workers: 4
+    chunk_limit: 2000
+
+telegram:
+  enabled: false
+  bot_token: ""
+  chat_id: ""
+  send_only_final_signals: true
+  prevent_duplicates: true
+  max_signal_age_seconds: 600
+  max_entry_age_seconds: 300
+  display_tz_offset_hours: 3
+  missed_entry_tp_threshold: 0.1
+  sent_signals_path: "state/sent_signals.json"
+
+runtime:
+  state_path: "state/live_state.json"
+  tick_seconds: 60
+  catchup_on_startup: true
+  catchup_send: false
+  catchup_max_bars_m1: 2000
+  catchup_max_bars_by_tf:
+    M1: 2000
+    M5: 2000
+    H1: 1000
+  catchup_fast_forward_if_exceed: true
+  timezone: "UTC"
+  track_outcomes: true
+  outcome_timeframe: "1m"
+  outcome_exit_priority: "SL_FIRST"
+  send_exit_notifications: false
+  pending_enabled: true
+  pending_ttl_seconds: 1800
+  pending_retry_send: false
+  telegram:
+    enabled: true
+    bot_token: ""
+    chat_id: ""
+    admin_chat_ids: ["804485553", "5292425376"]
+    nine_am_admin_only: true
+    admin_only_strategy_ids: ["nine_am", "layer_b_9am_cr", "crt_tbs_h4_m5", "crt_tbs_d1_h1"]
+    send_only_final_signals: true
+    prevent_duplicates: true
+    max_signal_age_seconds: 600
+    max_entry_age_seconds: 300
+    display_tz_offset_hours: 3
+    missed_entry_tp_threshold: 0.1
+    sent_signals_path: "state/sent_signals.json"
+
+strategies:
+  h1_m1:
+    enabled: true
+    market_modes: ["forex", "crypto"]
+    symbols: []
+    deny_symbols: []
+    timeframes:
+      h1: "H1"
+      m1: "M1"
+  layer_b_9am_cr:
+    enabled: true
+    strategy_version: "layer_b_9am_cr_v1.0.x"
+    config_version: "2026-02-25.layer_b.v1"
+    market_modes: ["forex"]
+    symbols: ["EURUSD", "GBPUSD", "USDJPY", "GBPJPY", "XAUUSD"]
+    defaults:
+      m1:
+        entry_window_minutes: 45
+        entry_style: "AUTO"
+        allow_breakout_entry: true
+        breakout:
+          require_close_through_poi: true
+          require_displacement: true
+          max_confirm_bars_after_break: 3
+        retest:
+          prefer_over_breakout: true
+        freshness:
+          max_progress_to_main_tp: 0.65
+      crt15:
+        lookback_bars: 2
+      grading:
+        min_grade_to_send: "B+"
+    symbol_profiles:
+      EURUSD:
+        m1:
+          entry_window_minutes: 45
+        htf_poi:
+          match_tolerance_points: 5.0
+        crt15:
+          lookback_bars: 2
+      GBPUSD:
+        m1:
+          entry_window_minutes: 45
+      XAUUSD:
+        m1:
+          entry_window_minutes: 60
+          entry_style: "AUTO"
+          breakout:
+            max_confirm_bars_after_break: 4
+            require_displacement: false
+          freshness:
+            max_progress_to_main_tp: 0.75
+        crt15:
+          lookback_bars: 3
+        grading:
+          min_grade_to_send: "A"
+    rollout:
+      mode: "full"
+      canary_symbols: ["XAUUSD", "EURUSD"]
+      send_enabled: true
+      shadow_mode: false
+    safety:
+      max_signals_per_symbol_per_day: 1
+      max_signals_total_per_day: 10
+      max_send_failures_before_auto_pause: 5
+    processing:
+      min_m1_scan_interval_seconds: 10
+    reentry:
+      enabled: true
+      max_reentries_per_symbol_per_day: 1
+      require_same_session_day: true
+      require_same_direction: true
+      require_m1_new_structure: true
+      require_new_entry_confirm_time: true
+      require_rr_to_tp1_min: 1.15
+      reuse_original_crt15_purge_if_valid: true
+      allow_reentry_after_m1_window_expired: false
+      send_reentry_message: true
+      dedupe_separate_from_primary: true
+      tracking_mode: "external_event"
+    notifications:
+      prep_enabled: false
+      prep_once_per_symbol_per_day: true
+      prep_cooldown_minutes: 30
+      entry_enabled: true
+      reentry_enabled: true
+    timeframes:
+      m1: "M1"
+      m15: "M15"
+      h1: "H1"
+      h4: "H4"
+    timezone: "America/New_York"
+    adm_hour_start_et: "08:00"
+    adm_hour_end_et: "09:00"
+    post_adm_search_end_et: "10:30"
+    m1:
+      entry_window_minutes: 45
+      entry_mode: "strict_ifvg_plus_ob"
+      entry_style: "AUTO"
+      allow_breakout_entry: true
+      breakout:
+        require_close_through_poi: true
+        require_displacement: true
+        max_confirm_bars_after_break: 3
+      retest:
+        prefer_over_breakout: true
+      freshness:
+        use_target_progress_gate: true
+        max_progress_to_main_tp: 0.65
+    crt15:
+      require_purge: true
+      lookback_bars: 2
+    risk:
+      sl_buffer_points: 0.0
+    tp:
+      be_move_after: "TP1"
+      use_internal_tp1: true
+      use_adm_mid_tp2: true
+      use_adm_opposing_tp3: true
+      use_external_liquidity_tp4: true
+      external:
+        source_preference: ["W1", "D1", "H4", "H1"]
+        min_distance_points: 0.0
+        max_distance_atr_mult: null
+    htf_poi:
+      enabled: true
+      lookback_days_h1: 20
+      lookback_days_h4: 60
+      use_daily_levels: true
+      use_weekly_levels: true
+      use_htf_fvg: true
+      use_htf_ob: false
+      use_htf_breaker: false
+      invalidation:
+        mode: "close_through"
+        close_count: 1
+      max_age_days_h1: 20
+      max_age_days_h4: 60
+      match_tolerance_points: 10.0
+      match_requires_zone_overlap: false
+      match_priority: ["W1", "D1", "H4", "H1"]
+    htf_context:
+      enabled: true
+      swing:
+        left: 2
+        right: 2
+      equal_levels:
+        enabled: true
+        tolerance_points: 10.0
+      use_pdh_pdl: true
+      use_htf_fvg: true
+      use_htf_ob: false
+      use_htf_breaker: false
+      sweep_match_tolerance_points: 15.0
+      require_keylevel_for_grade_a: true
+    grading:
+      enabled: true
+      min_grade_to_send: "B+"
+      b_plus_risk_note: "Reduced risk / lower size"
+
+
+pipelines:
+  - id: "crt_tbs_h1_m1"
+    strategy: "crt_tbs"
+    ctx_tf: "H4"
+    crt_tf: "H1"
+    ltf_tf: "M1"
+    entry_window_minutes: 45
+    max_entry_age_seconds: 900
+    freshness_progress_max: 0.7
+  - id: "crt_tbs_h4_m5"
+    strategy: "crt_tbs"
+    ctx_tf: "D1"
+    crt_tf: "H4"
+    ltf_tf: "M5"
+    entry_window_minutes: 360
+    max_entry_age_seconds: 5400
+    freshness_progress_max: 0.7
+  - id: "crt_tbs_d1_h1"
+    strategy: "crt_tbs"
+    ctx_tf: "W1"
+    crt_tf: "D1"
+    ltf_tf: "H1"
+    entry_window_minutes: 1440
+    max_entry_age_seconds: 21600
+    freshness_progress_max: 0.7
+
+
+mt5_data:
+  enabled: true
+  cache_dir: "data_cache/mt5"
+  symbols: ["EURUSD", "GBPUSD", "USDJPY", "XAUUSD"]
+  timeframes: ["M1", "M5", "M15", "H1", "H4", "D1", "W1"]
+  overlap_bars: 2
+  drop_incomplete_last_bar: true
+  atomic_write: true
+  gap_warn_multiplier: 3
+  gap_logging:
+    warn_min_bars_m1: 10
+    warn_min_bars_m5: 6
+    warn_min_bars_h1: 3
+    warn_min_bars_h4: 2
+    warn_min_bars_d1: 1
+    rollover_start_utc: "23:55"
+    rollover_end_utc: "01:10"
+    max_warnings_per_symbol_tf: 3

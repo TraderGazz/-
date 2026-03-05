@@ -1,0 +1,33 @@
+{
+  "symbol": "BTCUSDT",
+  "market": "crypto",
+  "range": {
+    "from": "2026-01-21T00:00:00+00:00",
+    "to": "2026-01-21T23:59:00+00:00"
+  },
+  "counts": {
+    "contexts_created": 7,
+    "contexts_active": 7,
+    "contexts_expired": 0,
+    "tbs_confirmed": 2,
+    "model1_confirmed": 1,
+    "entries_created": 1,
+    "entries_rejected": 0
+  },
+  "reasons": {
+    "tbs": {
+      "tbs_restarted": 3,
+      "no_sweep": 2
+    },
+    "model1": {
+      "tbs_not_confirmed": 5,
+      "no_confirmation": 1
+    },
+    "entry": {}
+  },
+  "timings": {
+    "context_to_tbs_avg_sec": 11940.0,
+    "tbs_to_model1_avg_sec": 120.0,
+    "model1_to_entry_avg_sec": 0.0
+  }
+}

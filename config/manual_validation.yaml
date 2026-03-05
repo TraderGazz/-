@@ -1,0 +1,174 @@
+markets:
+  forex:
+    enabled: false
+    symbols: []
+    mt5_timezone: "local"
+    point_value_map: {}
+    min_tick_map: {}
+    commission:
+      mode: "per_trade_points"
+      value_points_map: {}
+    spread:
+      mode: "fixed"
+      value_points_map: {}
+  crypto:
+    enabled: true
+    symbols: ["BTCUSDT"]
+    bybit_category: "linear"
+    commission_pct: 0.0006
+    commission_apply: "round_trip"
+    min_tick_map:
+      BTCUSDT: 0.01
+    spread:
+      mode: "fixed_pct"
+      value: 0.00005
+
+mode:
+  timeframe: "H1"
+  require_ltf: false
+  h1_only: true
+  ltf_enabled: false
+  model_enabled: true
+
+save_trades: true
+save_pipeline: true
+
+strategy_mode: "CRT_TBS"
+
+strategy:
+  crt_atr_mult: 1.3
+  atr_period: 14
+  crt_local_lookback: 8
+  crt_range_mult: 1.35
+  crt_body_pct_min: 0.5
+  crt_doji_body_pct_max: 0.1
+  crt_max_inside: 7
+  sweep_buffer_atr: 0.05
+  sweep_enabled: true
+  sweep_allow_multiple: true
+  sweep_check_inside_crt: true
+  sweep_penetration_min_pct: 0.0
+  crt_max_minutes: 90
+  h1_keylevel_post_crt_bars: 3
+  log_crt: false
+  logging:
+    enable_pipeline: true
+    enable_trade_stats: true
+    enable_manual_validation: true
+    manual_validation_date: "2026-01-21"
+  filters:
+    use_daily_extremes: false
+    daily_extreme_atr: 0.5
+    require_trend_alignment: false
+    trend_ma_period: 50
+    session_blocks: []
+    news:
+      enabled: false
+      blackout_minutes_before: 15
+      blackout_minutes_after: 15
+      events: []
+  keylevel:
+    pivot_k: 2
+    lookback: 50
+    max_dist_atr: 1.0
+    exclude_recent_bars: 3
+    touch_count: 1
+  h1_keylevel_lookback_bars: 100
+  swing_left: 2
+  swing_right: 2
+  fvg_enabled: true
+  ob_enabled: true
+  rb_enabled: true
+  ob_zone_mode: "body"
+  rb_wick_mult: 2.0
+  keylevel_zone_expand_pct: 0.05
+  h1_context_ttl_hours: 4
+  context_invalidation_enabled: false
+  confidence_weights:
+    crt: 1.0
+    keylevel: 1.0
+    sweep: 0.5
+    body_sweep: 0.5
+  tbs_enabled: true
+  tbs_max_wait_bars: 12
+  tbs_sweep_buffer_ticks: 0.0
+  tbs_sweep_buffer_pct: 0.0
+  tbs_return_buffer_ticks: 0.0
+  tbs_return_buffer_pct: 0.0
+  tbs_allow_wick_sweep: true
+  tbs_body_pct_min: 0.5
+  tbs_range_mult: 1.2
+  tbs_max_lifetime_bars: 60
+  model1_enabled: true
+  model1_max_wait_bars: 60
+  context_activation_max_h1_bars: 2
+  context_activation_requires_sweep: true
+  context_prefer_newer_crt: true
+  context_crt_override_min_ratio: 1.1
+  context_crt_override_if_updates_olp_ohp: true
+  ltf:
+    use_zone: false
+    window_minutes: 60
+    crt_window_minutes: 90
+    zone_depth_atr: 1.0
+    zone_buffer_atr: 0.2
+    zone_window_minutes: 30
+    model1_body_min_atr: 0.0
+    model1_body_pct_min: 0
+    model1_range_atr_min: 0.0
+    model1_wick_pct_max: 100
+    model1_mode: "STRICT"
+  entry:
+    mode: "market"
+    entry_slippage_pct: 0.0
+    entry_window_bars: 3
+    entry_enabled: true
+    entry_sl_mode: "model1"
+    entry_sl_buffer_type: "atr"
+    entry_sl_buffer_value: 1.2
+    entry_tp_enabled: true
+    entry_sl_buffer_ticks: 0.0
+    entry_sl_buffer_pct: 0.0
+  tp:
+    tp1_r: 0.9
+    tp2_r: 2.0
+    use_tp2: true
+
+risk:
+  max_cost_pct_tp1: 1.0
+  sl_buffer_atr: 0.2
+  slippage_atr_mult: 0.0
+  max_sl_atr: 100.0
+  cooldown_min: 0
+  position_size_mode: "fixed_risk"
+  risk_per_trade_pct: 0.5
+  tp1_fraction: 0.5
+
+m1:
+  model1:
+    min_body_atr_mult: 0.8
+    max_confirm_delay_bars: 3
+  entry:
+    enter_on_confirm_close: true
+    sl_buffer_atr_mult: 0.1
+
+backtest:
+  start_date: "2026-01-19 00:00:00+00:00"
+  end_date: "2026-01-22 23:59:00+00:00"
+  warmup_days: 1
+  seed: 42
+
+outputs:
+  base_dir: "outputs_manual_validation"
+
+data:
+  crypto:
+    use_disk_cache: true
+    cache_dir: "data_cache"
+    max_workers: 1
+    chunk_limit: 2000
+
+telegram:
+  enabled: false
+  bot_token: ""
+  chat_id: ""

@@ -1,0 +1,21 @@
+{
+  "crt_count": 0,
+  "crt_types": {},
+  "crt_single_count": 0,
+  "crt_inside_count": 0,
+  "keylevel_count": 0,
+  "keylevel_by_type": {},
+  "crt_with_keylevel_count": 0,
+  "crt_rejected_no_keylevel_count": 0,
+  "sweep_total": 0,
+  "sweep_by_type": {},
+  "sweep_buy_count": 0,
+  "sweep_sell_count": 0,
+  "context_created_count": 0,
+  "context_expired_count": 0,
+  "context_count": 0,
+  "tbs_count": 0,
+  "model1_count": 0,
+  "trades_count": 0,
+  "trades": []
+}

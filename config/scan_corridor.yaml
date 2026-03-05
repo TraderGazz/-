@@ -1,0 +1,29 @@
+scan_window:
+  from: "2026-01-19 00:00"
+  to: "2026-01-23 23:59"
+  timezone: "UTC"
+
+post_crt_window:
+  enabled: true
+  max_hours_after_crt: 4
+
+direction_filter:
+  enabled: false
+  allowed:
+    - BUY
+    - SELL
+
+crt_filter:
+  enabled: false
+  allowed_types:
+    - single
+    - box
+
+key_level_filter:
+  enabled: false
+  required:
+    - OHP
+    - OLP
+    - FVG
+    - OB
+    - RB

@@ -1,0 +1,20 @@
+{
+  "subscribers": {
+    "804485553": {
+      "chat_id": 804485553,
+      "added_at": "2026-03-05T15:05:10Z",
+      "updated_at": "2026-03-05T19:57:14Z",
+      "source": "admin",
+      "is_active": true,
+      "is_admin": true
+    },
+    "5292425376": {
+      "chat_id": 5292425376,
+      "added_at": "2026-03-05T15:05:10Z",
+      "updated_at": "2026-03-05T19:57:14Z",
+      "source": "admin",
+      "is_active": true,
+      "is_admin": true
+    }
+  }
+}
